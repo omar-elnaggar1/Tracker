@@ -38,7 +38,7 @@ export function QuickLog({ kpi, date, color }: { kpi: Kpi; date: string; color: 
                 title={`${i + 1}`}
                 aria-label={`Set ${kpi.name} to ${i + 1}`}
                 onClick={() => set(day === i + 1 ? i : i + 1)}
-                className="h-7 w-7 rounded-full border-2 transition"
+                className="h-9 w-9 rounded-full border-2 transition sm:h-7 sm:w-7"
                 style={i < day ? { background: color, borderColor: color } : { borderColor: "#334155" }}
               />
             ))}
@@ -63,12 +63,12 @@ export function QuickLog({ kpi, date, color }: { kpi: Kpi; date: string; color: 
 
     case "score":
       return (
-        <div className="flex flex-wrap gap-1">
+        <div className="grid w-full grid-cols-10 gap-1 sm:flex sm:w-auto">
           {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
             <button
               key={n}
               onClick={() => set(day === n ? 0 : n)}
-              className="h-7 w-7 rounded-md border text-xs font-semibold transition"
+              className="h-9 rounded-md border text-xs font-semibold transition sm:h-7 sm:w-7"
               style={n === day ? { background: color, borderColor: color, color: "#020617" } : { borderColor: "#334155" }}
             >
               {n}
@@ -93,7 +93,7 @@ function AmountLog({ value, unit, onSet }: { value: number; unit: string; onSet:
   };
   return (
     <form
-      className="flex items-center gap-2"
+      className="flex w-full items-center gap-2 sm:w-auto"
       onSubmit={(e) => {
         e.preventDefault();
         submit("add");
@@ -107,7 +107,7 @@ function AmountLog({ value, unit, onSet }: { value: number; unit: string; onSet:
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder={unit || "amount"}
-        className={`${inputCls} w-24`}
+        className={`${inputCls} w-0 min-w-0 flex-1 sm:w-24 sm:flex-none`}
       />
       <button type="submit" className={btnCls} disabled={!valid} title="Add to today's total">
         + Add
@@ -138,7 +138,7 @@ export function MilestoneList({ kpi, color, editable = true }: { kpi: Kpi; color
           {editable && (
             <button
               onClick={() => deleteMilestone(m.id)}
-              className="ml-auto text-xs text-slate-600 opacity-0 group-hover:opacity-100 hover:text-red-400"
+              className="ml-auto px-1 text-xs text-slate-600 hover:text-red-400 sm:opacity-0 sm:group-hover:opacity-100"
               aria-label={`Delete ${m.title}`}
             >
               ✕

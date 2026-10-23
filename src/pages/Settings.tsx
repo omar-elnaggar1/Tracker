@@ -14,7 +14,7 @@ export default function SettingsPage() {
 
   return (
     <div className="max-w-2xl space-y-6">
-      <h1 className="text-3xl font-bold">Settings</h1>
+      <h1 className="text-2xl font-bold md:text-3xl">Settings</h1>
 
       <Card className="space-y-4">
         <h2 className="font-semibold">Schedule</h2>
@@ -88,7 +88,7 @@ export default function SettingsPage() {
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between gap-4">
+    <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
       <span className="text-sm">{label}</span>
       {children}
     </div>

@@ -32,6 +32,19 @@ It connects to the Supabase project configured in `.env`. If those values are em
 
 Starter areas and KPIs are created on first sign-in. Edit them on the Goals page.
 
+## Put it online + install on your phone
+
+The app is a PWA: one codebase that works on desktop and installs on phones like a normal app.
+
+1. Go to [vercel.com](https://vercel.com) and sign up with GitHub.
+2. Click **Add New… → Project**, import `omar-elnaggar1/Tracker`, and click **Deploy**. The defaults are correct: Vite, `npm run build`, output `dist`. If the branch you want isn't `main`, change it under **Settings → Environments → Production → Branch Tracking**.
+3. Copy your live URL (e.g. `https://tracker-xyz.vercel.app`). In Supabase, go to **Authentication → URL Configuration** and set **Site URL** to it.
+4. On your phone, open the URL and sign in:
+   - **iPhone:** Safari → Share → **Add to Home Screen**
+   - **Android:** Chrome → ⋮ → **Install app**
+
+Every push to the branch redeploys automatically, and the installed app updates itself.
+
 ## Scripts
 | | |
 |---|---|
@@ -48,5 +61,4 @@ supabase/      SQL migration
 ```
 
 ## Roadmap
-- Mobile: responsive layout + installable PWA on the same Supabase backend (optionally Capacitor for app stores).
 - Reminders while the app is closed: Web Push driven by a Supabase scheduled function.

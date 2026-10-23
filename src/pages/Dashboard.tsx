@@ -47,7 +47,7 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Dashboard</h1>
+      <h1 className="text-2xl font-bold md:text-3xl">Dashboard</h1>
 
       <div className="grid gap-4 lg:grid-cols-3">
         <Card className="flex flex-col items-center justify-center gap-3">
@@ -62,7 +62,7 @@ export default function Dashboard() {
               if (s === undefined) return null;
               return (
                 <div key={a.id} className="flex items-center gap-3">
-                  <span className="w-36 truncate text-sm">
+                  <span className="w-28 truncate text-sm sm:w-36">
                     {a.icon} {a.name}
                   </span>
                   <div className="h-3 flex-1 overflow-hidden rounded-full bg-slate-800">
@@ -155,7 +155,7 @@ function KpiDetail({ today }: { today: string }) {
     <Card className="lg:col-span-2">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <h2 className="font-semibold">KPI history</h2>
-        <select className={inputCls} value={kpi.id} onChange={(e) => setId(e.target.value)}>
+        <select className={`${inputCls} w-full sm:w-auto`} value={kpi.id} onChange={(e) => setId(e.target.value)}>
           {db.areas.map((a) => (
             <optgroup key={a.id} label={a.name}>
               {tracked

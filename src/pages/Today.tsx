@@ -26,15 +26,15 @@ export default function Today() {
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="text-sm text-slate-400">{format(fromISO(date), "EEEE, d MMMM yyyy")}</p>
-          <h1 className="text-3xl font-bold">{isToday ? greeting(now) : "Editing a past day"}</h1>
+          <h1 className="text-2xl font-bold md:text-3xl">{isToday ? greeting(now) : "Editing a past day"}</h1>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex w-full items-center gap-2 sm:w-auto">
           <button className={btnCls} onClick={() => setDate(toISO(addDays(fromISO(date), -1)))} aria-label="Previous day">
             ←
           </button>
           <input
             type="date"
-            className={inputCls}
+            className={`${inputCls} min-w-0 flex-1 sm:flex-none`}
             value={date}
             max={today}
             onChange={(e) => e.target.value && setDate(e.target.value)}
@@ -55,7 +55,7 @@ export default function Today() {
         </div>
       </header>
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 lg:grid-cols-3">
         <Card className="flex items-center gap-5">
           <ProgressRing
             value={(completion ?? 0) * 100}
@@ -131,12 +131,12 @@ function CheckIn({ date }: { date: string }) {
   return (
     <Card>
       <p className="mb-2 text-sm text-slate-400">How was the day? (1–10)</p>
-      <div className="flex flex-wrap gap-1">
+      <div className="grid grid-cols-10 gap-1 sm:flex">
         {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
           <button
             key={n}
             onClick={() => save(n, existing?.note ?? note)}
-            className="h-7 w-7 rounded-md border text-xs font-semibold"
+            className="h-9 rounded-md border text-xs font-semibold sm:h-7 sm:w-7"
             style={
               n === score
                 ? { background: scoreColor(n * 10), borderColor: scoreColor(n * 10), color: "#020617" }

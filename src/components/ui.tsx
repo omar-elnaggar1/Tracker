@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`rounded-2xl border border-slate-800 bg-slate-900/60 p-5 ${className}`}>{children}</div>;
+  return <div className={`min-w-0 rounded-2xl border border-slate-800 bg-slate-900/60 p-4 md:p-5 ${className}`}>{children}</div>;
 }
 
 export function ProgressRing({
@@ -65,8 +65,8 @@ export function scoreColor(score: number) {
 }
 
 export const inputCls =
-  "rounded-lg border border-slate-700 bg-slate-950 px-3 py-1.5 text-sm text-slate-100 outline-none focus:border-slate-400";
+  "rounded-lg border border-slate-700 bg-slate-950 px-3 py-1.5 text-base text-slate-100 outline-none sm:text-sm focus:border-slate-400";
 export const btnCls =
-  "rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-sm font-medium text-slate-100 hover:bg-slate-700 disabled:opacity-40";
+  "rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm font-medium sm:py-1.5 text-slate-100 hover:bg-slate-700 disabled:opacity-40";
 export const primaryBtnCls =
-  "rounded-lg bg-emerald-500 px-3 py-1.5 text-sm font-semibold text-slate-950 hover:bg-emerald-400 disabled:opacity-40";
+  "rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold sm:py-1.5 text-slate-950 hover:bg-emerald-400 disabled:opacity-40";

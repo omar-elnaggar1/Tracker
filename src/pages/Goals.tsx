@@ -21,9 +21,9 @@ export default function Goals() {
 
   return (
     <div className="space-y-6">
-      <header className="flex items-end justify-between">
+      <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-3xl font-bold">Goals & KPIs</h1>
+          <h1 className="text-2xl font-bold md:text-3xl">Goals & KPIs</h1>
           <p className="text-sm text-slate-400">Define what "on track" means for every part of your life.</p>
         </div>
         <button
@@ -50,7 +50,7 @@ function AreaEditor({ area }: { area: Area }) {
 
   return (
     <Card>
-      <div className="mb-4 flex flex-wrap items-center gap-2">
+      <div className="mb-4 flex items-center gap-2">
         <input
           className={`${inputCls} w-14 text-center text-lg`}
           value={draft.icon}
@@ -58,14 +58,14 @@ function AreaEditor({ area }: { area: Area }) {
           aria-label="Icon (emoji)"
         />
         <input
-          className={`${inputCls} flex-1 text-base font-semibold`}
+          className={`${inputCls} min-w-0 flex-1 font-semibold`}
           value={draft.name}
           onChange={(e) => setDraft({ ...draft, name: e.target.value })}
           aria-label="Area name"
         />
         <input
           type="color"
-          className="h-9 w-12 cursor-pointer rounded-lg border border-slate-700 bg-slate-950"
+          className="h-9 w-10 shrink-0 cursor-pointer rounded-lg border border-slate-700 bg-slate-950"
           value={draft.color}
           onChange={(e) => setDraft({ ...draft, color: e.target.value })}
           aria-label="Color"
@@ -78,8 +78,10 @@ function AreaEditor({ area }: { area: Area }) {
         <button
           className={`${btnCls} text-red-300`}
           onClick={() => confirm(`Delete "${area.name}" and all its KPIs and history?`) && deleteArea(area.id)}
+          aria-label={`Delete ${area.name}`}
         >
-          Delete
+          <span className="sm:hidden">✕</span>
+          <span className="hidden sm:inline">Delete</span>
         </button>
       </div>
 
@@ -121,12 +123,12 @@ function KpiEditor({ kpi, color }: { kpi: Kpi; color: string }) {
 
   return (
     <div className={`rounded-xl border border-slate-800 p-3 ${draft.active ? "" : "opacity-50"}`}>
-      <div className="flex flex-wrap items-end gap-2">
-        <Field label="Name" className="min-w-48 flex-1">
+      <div className="grid grid-cols-2 items-end gap-2 sm:flex sm:flex-wrap">
+        <Field label="Name" className="col-span-2 flex-1 sm:min-w-48">
           <input className={`${inputCls} w-full`} value={draft.name} onChange={(e) => set("name", e.target.value)} />
         </Field>
         <Field label="Type">
-          <select className={inputCls} value={draft.type} onChange={(e) => set("type", e.target.value as KpiType)}>
+          <select className={`${inputCls} w-full`} value={draft.type} onChange={(e) => set("type", e.target.value as KpiType)}>
             {TYPES.map((t) => (
               <option key={t.value} value={t.value}>
                 {t.label}
@@ -141,7 +143,7 @@ function KpiEditor({ kpi, color }: { kpi: Kpi; color: string }) {
                 type="number"
                 min={0}
                 step="any"
-                className={`${inputCls} w-28`}
+                className={`${inputCls} w-full sm:w-28`}
                 value={draft.target}
                 onChange={(e) => set("target", Number(e.target.value) || 0)}
               />
@@ -149,7 +151,7 @@ function KpiEditor({ kpi, color }: { kpi: Kpi; color: string }) {
             {draft.type !== "checkbox" && draft.type !== "score" && (
               <Field label="Unit">
                 <input
-                  className={`${inputCls} w-24`}
+                  className={`${inputCls} w-full sm:w-24`}
                   value={draft.unit}
                   placeholder="hrs"
                   onChange={(e) => set("unit", e.target.value)}
@@ -157,7 +159,7 @@ function KpiEditor({ kpi, color }: { kpi: Kpi; color: string }) {
               </Field>
             )}
             <Field label="Per">
-              <select className={inputCls} value={draft.period} onChange={(e) => set("period", e.target.value as Period)}>
+              <select className={`${inputCls} w-full`} value={draft.period} onChange={(e) => set("period", e.target.value as Period)}>
                 {PERIODS.map((p) => (
                   <option key={p} value={p}>
                     {p}
@@ -168,7 +170,7 @@ function KpiEditor({ kpi, color }: { kpi: Kpi; color: string }) {
             <Field label="Remind at">
               <input
                 type="time"
-                className={inputCls}
+                className={`${inputCls} w-full`}
                 value={draft.reminder_time ?? ""}
                 onChange={(e) => set("reminder_time", e.target.value || null)}
               />
@@ -179,7 +181,7 @@ function KpiEditor({ kpi, color }: { kpi: Kpi; color: string }) {
           <input type="checkbox" checked={draft.active} onChange={(e) => set("active", e.target.checked)} />
           Active
         </label>
-        <div className="ml-auto flex gap-2">
+        <div className="flex justify-end gap-2 sm:ml-auto">
           {dirty && (
             <button className={primaryBtnCls} onClick={() => saveKpi(draft)}>
               Save
