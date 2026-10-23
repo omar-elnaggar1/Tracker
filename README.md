@@ -20,14 +20,14 @@ npm install
 npm run dev        # http://localhost:5173
 ```
 
-With no configuration, it runs in **local mode**: data is saved in this browser only. That's good for trying it out.
+It connects to the Supabase project configured in `.env`. If those values are empty, it runs in **local mode** instead: data is saved in this browser only.
 
 ## Turn on cloud sync (Supabase, free)
 
 1. Create a project at [supabase.com](https://supabase.com).
 2. Open **SQL Editor**, paste the contents of `supabase/migrations/0001_init.sql`, and run it. This creates the tables, the row-level security policies (only you can see your data) and realtime sync.
 3. Optional, for a personal app: under **Authentication → Providers → Email**, turn off "Confirm email" so you can sign in immediately.
-4. Copy `.env.example` to `.env.local` and fill in `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` from **Project Settings → API**.
+4. The project's URL and public anon key are already in `.env`. To point at a different project, put your own `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` in `.env.local` (see `.env.example`).
 5. Restart `npm run dev` and create your account. Changes now sync live across every device you're signed in on.
 
 Starter areas and KPIs are created on first sign-in. Edit them on the Goals page.
